@@ -3,11 +3,14 @@ An introduction and set of resources to unit testing in Drupal.
 ## PHPUnit
 Drupal leverages the opensource [PHPUnit testing framework](https://phpunit.de/).
 
-Drupal has three kinds of tests that you can create:
+Drupal has three main kinds of tests that you can create:
 ### Unit
 Use these to test individual functions that are fairly self contained. 
 - Unit tests do NOT load the database.
-- Unit tests do NOT load a full Drupal site.
+- Unit tests do NOT load a full Drupal site. 
+
+If the functionality you are testing interacts with Drupal in a meaningful way such as 
+leveraging Drupal's classes or other functionality, you will likely be better off with a Kernel or Functional test.
 ### Kernel
 Kernel tests offer a middlegound between Unit and Functional tests. <br/>
 They bootstrap the kernel and a minimal number of extensions.
@@ -20,8 +23,83 @@ A single test can take a few minutes to run, depending on the complexity and num
 ## Test data
 
 Unit tests in Drupal do **NOT** use your project’s data. 
-All data is created/defined specifically for the tests.
+All data is created/defined specifically for the tests. 
 
-## Installing PHPUnit and Running Tests
+A new database is created for each test. 
+This helps make sure your tests are repeatable as they don't rely on changing data.
+
+You have a few options for where the test data/tables are created.  
+* You can setup phpunit to use your existing drupal database to store the test data
+* You can define a separate database for tests.
+* You can use the built-in sqlite.
+
+## Installing PHPUnit
+
+```
+composer require --dev phpunit/phpunit
+composer require --dev phpspec/prophecy-phpunit:^2
+composer require drupal/entity_browser --dev
+```
+Test your installation with: 
+```
+vendor/bin/phpunit --version
+```
+
+## Running Tests
+
+Drupal uses 2 different test runners: *run-tests.sh* and *phpunit*
+
+Run all tests in a group: 
+```
+phpunit --group topics
+```
+
+Run all tests in a module:
+```
+phpunit web/modules/custom/topics
+```
+
+Run a specific test:
+```
+phpunit web/modules/custom/topics/tests/src/Functional/TopicTest.php
+```
+
+Full list of phpunit runner command line options:
+https://phpunit.readthedocs.io/en/9.5/textui.html
+
 
 ### Lando Integration
+
+
+## Unit Tests
+
+## Kernel Tests
+Since Drupal is not fully bootstrapped for kernel tests, 
+you need to specify which schemas are needed for your tests. 
+
+For example, if you are working with nodes, you might need the node data schema:  
+```
+$this->installSchema('node', ['node_data']);
+```
+`installSchema()` expects a module name, and the table you need managed by that module.
+
+You could also just require all the schemas for that module if you are unsure with: 
+```
+$this->installEntitySchema('node');
+```
+
+## Functional Tests
+
+### BrowserTestBase
+
+Base class: `Drupal\Tests\BrowserTestBase`
+
+### WebDriverTestBase
+
+Base class: `Drupal\FunctionalJavascriptTests\WebDriverTestBase`
+
+## Resources and Links
+[Drupal Docs - Automated testing](https://www.drupal.org/docs/automated-testing)
+
+----
+This is a work in progress. Feel free to create a pull request to add or edit any of the information.
