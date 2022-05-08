@@ -80,8 +80,5 @@ https://phpunit.readthedocs.io/en/9.5/textui.html
 
 
 
-## Resources and Links
-[Drupal Docs - Automated testing](https://www.drupal.org/docs/automated-testing)
-
 ----
 This is a work in progress. Feel free to create a pull request to add or edit any of the information.
