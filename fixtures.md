@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Kernel Tests
+title: Fixtures
 nav_order: 8
 ---
 

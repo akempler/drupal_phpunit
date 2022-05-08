@@ -6,7 +6,7 @@ nav_order: 1
 
 # Drupal Unit Testing
 
-An introduction and set of resources for unit testing in Drupal.{: .fs-6 .fw-300 }
+An introduction and set of resources for unit testing in Drupal{: .fs-6 .fw-300 }
 
 [View it on GitHub](https://github.com/akempler/drupal_phpunit){: .btn .fs-5 .mb-4 .mb-md-0 }
 

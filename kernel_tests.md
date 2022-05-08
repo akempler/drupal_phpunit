@@ -9,6 +9,8 @@ nav_order: 4
 Since Drupal is not fully bootstrapped for kernel tests, 
 you need to specify which schemas are needed for your tests. 
 
+Kernel tests do not use the internal web browser, so if you need commands like drupalGet() or drupalPost() you will need a functional test.
+
 For example, if you are working with nodes, you might need the node data schema:  
 ```
 $this->installSchema('node', ['node_data']);
@@ -19,3 +21,7 @@ You could also just require all the schemas for that module if you are unsure wi
 ```
 $this->installEntitySchema('node');
 ```
+
+## Additional Resources
+
+[Drupal Docs - KernelTestBase](https://www.drupal.org/docs/automated-testing/phpunit-in-drupal/kerneltestbase)
