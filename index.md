@@ -1,4 +1,12 @@
-An introduction and set of resources to unit testing in Drupal.
+---
+layout: default
+title: Intro
+nav_order: 1
+---
+
+# Drupal Unit Testing
+
+An introduction and set of resources for unit testing in Drupal.
 
 ## PHPUnit
 Drupal leverages the opensource [PHPUnit testing framework](https://phpunit.de/).
@@ -71,32 +79,6 @@ https://phpunit.readthedocs.io/en/9.5/textui.html
 ### Lando Integration
 
 
-## Unit Tests
-
-## Kernel Tests
-Since Drupal is not fully bootstrapped for kernel tests, 
-you need to specify which schemas are needed for your tests. 
-
-For example, if you are working with nodes, you might need the node data schema:  
-```
-$this->installSchema('node', ['node_data']);
-```
-`installSchema()` expects a module name, and the table you need managed by that module.
-
-You could also just require all the schemas for that module if you are unsure with: 
-```
-$this->installEntitySchema('node');
-```
-
-## Functional Tests
-
-### BrowserTestBase
-
-Base class: `Drupal\Tests\BrowserTestBase`
-
-### WebDriverTestBase
-
-Base class: `Drupal\FunctionalJavascriptTests\WebDriverTestBase`
 
 ## Resources and Links
 [Drupal Docs - Automated testing](https://www.drupal.org/docs/automated-testing)
