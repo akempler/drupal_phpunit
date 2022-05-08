@@ -1,5 +1,10 @@
 remote_theme: just-the-docs/just-the-docs
 
+title: Drupal Unit Testing
+description: An introduction and overview of Drupal unit testing.
+baseurl: "/" # the subpath of your site, e.g. /blog
+url: "https://akempler.github.io/drupal_phpunit/" # the base hostname & protocol for your site, e.g. http://example.com
+
 # Enable or disable heading anchors
 heading_anchors: true
 

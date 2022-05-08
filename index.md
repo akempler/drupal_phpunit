@@ -6,10 +6,9 @@ nav_order: 1
 
 # Drupal Unit Testing
 
-{: .fs-9 }
-An introduction and set of resources for unit testing in Drupal.
+An introduction and set of resources for unit testing in Drupal.{: .fs-6 .fw-300 }
 
-{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [View it on GitHub](https://github.com/akempler/drupal_phpunit){: .btn .fs-5 .mb-4 .mb-md-0 }
+[View it on GitHub](https://github.com/akempler/drupal_phpunit){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
