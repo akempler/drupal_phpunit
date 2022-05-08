@@ -83,7 +83,35 @@ https://phpunit.readthedocs.io/en/9.5/textui.html
 
 ### Lando Integration
 
+I followed this set of steps for setting up lando to run unit tests. 
+[How to run Drupal’s PHPUnit tests in Lando](https://agile.coop/blog/drupal-phpunit-tests-lando/).
 
+If you already have a lando site setup you can skip to the "Configure Lando for PHPUnit tests" section. 
+
+Once setup you can run tests using `lando test <whatever you want to pass to phpunit>`
+
+#### A few additions to the steps linked above:
+When setting up the phpunit.xml file (discussed in link above), I had to modify the `<testsuites>` 
+section to match the paths of my lando installation which uses `/web` as the drupal root:
+```xml
+  <testsuites>
+    <testsuite name="unit">
+      <file>web/core/tests/TestSuites/UnitTestSuite.php</file>
+    </testsuite>
+    <testsuite name="kernel">
+      <file>web/core/tests/TestSuites/KernelTestSuite.php</file>
+    </testsuite>
+    <testsuite name="functional">
+      <file>web/core/tests/TestSuites/FunctionalTestSuite.php</file>
+    </testsuite>
+    <testsuite name="functional-javascript">
+      <file>web/core/tests/TestSuites/FunctionalJavascriptTestSuite.php</file>
+    </testsuite>
+    <testsuite name="build">
+      <file>web/core/tests/TestSuites/BuildTestSuite.php</file>
+    </testsuite>
+  </testsuites>
+  ```
 
 ----
 This is a work in progress. Feel free to create a pull request to add or edit any of the information.
