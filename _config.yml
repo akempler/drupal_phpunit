@@ -10,7 +10,7 @@ heading_anchors: true
 back_to_top: true
 back_to_top_text: "Back to top"
 
-footer_content: "Copyright &copy; 2022 Adam Kempler.
+footer_content: "Copyright &copy; 2022 Adam Kempler."
 
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
