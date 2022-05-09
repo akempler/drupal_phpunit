@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Functional Testing
+title: Functional Tests
 nav_order: 4
 ---
 
@@ -239,3 +239,90 @@ Now we can extend the TopicTypeList() test to test not just the empty state, but
   }
 
 ```
+
+### Some additional tests to make on the topic types:
+
+Here we make sure we can delete a topic type without error.
+
+```php
+  /**
+   * Tests the topic type edit page.
+   */
+  public function testTopicTypeDelete() {
+    $this->topic_type = $this->createTopicType('test_topic_type', 'Test Topic Type', 'This is a test topic type');
+    $this->drupalGet($this->topic_type->toUrl('delete-form'));
+
+    $this->submitForm([], 'Delete');
+    $topic_type_exists = (bool) TopicType::load($this->topic_type->id());
+    $this->assertEmpty($topic_type_exists);
+
+    $this->assertSession()->pageTextContains('The topic type Test Topic Type has been deleted.');
+  }
+  ```
+
+Some things being done in this test:
+
+Instead of hard coding the route path for the drupalGet function, we get it from the topic_type entity by referencing the entity link 'delete-form':  
+```php
+$this->drupalGet($this->topic_type->toUrl('delete-form'));
+```
+We then submit the delete form using `submitForm()`.
+The first parameter, where we are passing an empty array, allows you to set an array of values to be submitted. These would be the form fields for example. The second parameter is the button we want to emulate clicking. In this case 'Delete'.
+
+We then assert that the topic type with that id no longer exists.
+
+We also assert that the deleted message is displayed.
+
+Some improvements to the above would be to use variables for the topic type names.
+
+Another piece of functionality in the Topics system is that you can enable different entity types to be added to a topic. Here's an example of a test for that page:
+```php
+/**
+ * Tests the topic type - assignable resources page.
+ */
+public function testTopicTypeAssignableResourcesPage() {
+    $this->drupalCreateContentType(array('type' => 'article', 'name' => 'Article'));
+
+    $this->type = $this->createTopicType('test_topic_type', 'Test Topic Type', 'This is a test topic type');
+    $this->drupalGet('/admin/structure/topic_types/test_topic_type/topic_content_types');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Assignable Resource Types');
+    $this->assertSession()->pageTextContains('Article');
+    $this->assertSession()->linkExists('Enable');
+
+    $this->clickLink('Enable');
+    $this->assertSession()->statusCodeEquals(200);
+    $this->assertSession()->pageTextContains('Enable topic resource');
+
+    $page = $this->getSession()->getPage();
+    $page->fillField('max_entities', '6');
+    $page->pressButton('Save');
+
+    $this->drupalGet('/admin/structure/topic_types/test_topic_type/topic_content_types');
+    $this->assertSession()->pageTextContains('Assignable Resource Types');
+    $this->assertSession()->linkExists('Disable');
+}
+```
+First we create an 'article' content type (node type) so that we can enable it for a topic type. Remember, no data exists except for what we create, so default content types like article wouldn't exist out of the box.
+
+If an entity type hasn't been enabled for a topic type yet, it should have an 'enable' link. If it is enabled, it should have a 'disabled' link. So we check for the 'Enable' link with: 
+```php
+$this->assertSession()->linkExists('Enable');
+```
+We then click it with: 
+```php
+$this->clickLink('Enable');
+```
+Clicking that link should take us to the 'Enable topic resource' form. We confirm are redirected there. 
+
+We then fill out the form fields and press the "Save" button. 
+```php
+// Get the Document Element so we can access specific fields.
+$page = $this->getSession()->getPage();
+// Fill the max_entities form field with the value '6'.
+$page->fillField('max_entities', '6');
+// Click the Save button.
+$page->pressButton('Save');
+```
+
+We should now be redirected back to the assignable resources page, and the article entity type should have a 'disable' link since we just enabled it.
