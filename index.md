@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Intro
+title: Intro and Setup
 nav_order: 1
 ---
 
 # Drupal Unit Testing
 
-An introduction and set of resources for unit testing in Drupal{: .fs-6 .fw-300 }
+An introduction and set of resources for unit testing in Drupal
 
 [View it on GitHub](https://github.com/akempler/drupal_phpunit){: .btn .fs-5 .mb-4 .mb-md-0 }
 
@@ -34,7 +34,7 @@ A single test can take a few minutes to run, depending on the complexity and num
 
 ## Test data
 
-Unit tests in Drupal do **NOT** use your project’s data. 
+Unit tests in Drupal do NOT use your project’s data. 
 All data is created/defined specifically for the tests. 
 
 A new database is created for each test. 
@@ -59,7 +59,7 @@ vendor/bin/phpunit --version
 
 ## Running Tests
 
-Drupal uses 2 different test runners: *run-tests.sh* and *phpunit*
+Drupal has 2 different test runners: *run-tests.sh* and *phpunit*. Here are some examples using phpunit:
 
 Run all tests in a group: 
 ```
@@ -77,7 +77,7 @@ phpunit web/modules/custom/topics/tests/src/Functional/TopicTest.php
 ```
 
 Full list of phpunit runner command line options:
-https://phpunit.readthedocs.io/en/9.5/textui.html
+[The Command-Line Test Runner](https://phpunit.readthedocs.io/en/9.5/textui.html)
 
 
 ### Lando Integration

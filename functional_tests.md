@@ -8,11 +8,9 @@ nav_order: 4
 
 ## BrowserTestBase
 
-Base class: `Drupal\Tests\BrowserTestBase`
-
-## WebDriverTestBase
-
-Base class: `Drupal\FunctionalJavascriptTests\WebDriverTestBase`
+The following examples use the BrowserTestBase as the base class. 
+If you need to test javascript/ajax functionality you can extend the `Drupal\FunctionalJavascriptTests\WebDriverTestBase` base class. 
+Tests extending this should go in a `/tests/src/FunctionalJavascript/` directory.
 
 ## Assertions
 
