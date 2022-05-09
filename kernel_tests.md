@@ -6,10 +6,12 @@ nav_order: 4
 
 # Kernel Tests
 
-Since Drupal is not fully bootstrapped for kernel tests, 
-you need to specify which schemas are needed for your tests. 
+Kernel tests are a good way to test your APIs and other functionality not accessed through the browser.
 
 Kernel tests do not use the internal web browser, so if you need commands like drupalGet() or drupalPost() you will need a functional test.
+
+Since Drupal is not fully bootstrapped for kernel tests, 
+you need to specify which schemas are needed for your tests. 
 
 For example, if you are working with nodes, you might need the node data schema:  
 ```
@@ -21,6 +23,10 @@ You could also just require all the schemas for that module if you are unsure wi
 ```
 $this->installEntitySchema('node');
 ```
+
+## Examples
+Coming soon
+{: .label .label-yellow }
 
 ## Additional Resources
 

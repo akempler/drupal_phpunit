@@ -1,6 +1,6 @@
 ---
 layout: default
-title: A first test
+title: A First Test
 nav_order: 3
 ---
 
@@ -69,6 +69,8 @@ class TopicTypeTest extends BrowserTestBase {
   public function testTopicTypeList() {
     $this->drupalGet('/admin/structure/topic_types');
     $this->assertSession()->statusCodeEquals(200);
+
+    $this->assertSession()->pageTextContains('No topic types available.');
   }
 ```
 
@@ -99,6 +101,16 @@ You can the run all tests in a specified group.
   ];
 ```
 These are the modules that need to be enabled in order to test your code. 
+
+### $defaultTheme
+```php
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
+```
+You must specify the default theme that will be used for the browser based test. 
+If you were relying on some core markup for some functionality, you might want to use another theme.
 
 ### setup()
 ```php
@@ -135,10 +147,15 @@ In this case for each thing we'll want to test, we create and login an admin use
   public function testTopicTypeList() {
     $this->drupalGet('/admin/structure/topic_types');
     $this->assertSession()->statusCodeEquals(200);
+
+    $this->assertSession()->pageTextContains('No topic types available.');
   }
 ```
-This is our test function. It uses drupalGet() to request a drupal path, and then asserts that the page returns a 200 response code.
+This is our test function. It uses drupalGet() to request the path for our list of topic types, and then asserts that the page returns a 200 response code. If the page was not working, and returned anything other than a 200, the assertion would fail, and the test would be marked as failed.
 
+We also check that the expected default text for the page when no topic types have been created yet is displayed. If this text is not displayed, it may be a sign that something is wrong with the page.
+
+## Running the test
 You can run the test with phpunit:  
 
 ```php
