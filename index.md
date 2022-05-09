@@ -112,5 +112,7 @@ section to match the paths of my lando installation which uses `/web` as the dru
   </testsuites>
   ```
 
+  [A .lando.yml gist with phpunit integration](https://gist.github.com/segovia94/271dee02a907e57e0c3559e83dbb7783).
+
 ----
 This is a work in progress. Feel free to create a pull request to add or edit any of the information.

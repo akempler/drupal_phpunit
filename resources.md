@@ -9,3 +9,5 @@ nav_order: 20
 [Drupal Docs - Automated testing](https://www.drupal.org/docs/automated-testing)
 
 [Drupal Docs - PHPUnit Browser test tutorial](https://www.drupal.org/docs/automated-testing/phpunit-in-drupal/phpunit-browser-test-tutorial)
+
+[Drupal Docs - Unit testing more complicated classes](https://www.drupal.org/docs/automated-testing/phpunit-in-drupal/unit-testing-more-complicated-drupal-classes)
